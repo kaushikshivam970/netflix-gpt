@@ -1,12 +1,22 @@
-# React + Vite
+# Features of Netflix GPT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# For Logged Out User 
+-Signin Page 
+-Signout Page
+-Once user get Logged In he will be redirected to the Browser Page
 
-Currently, two official plugins are available:
+# For Logged In Users (After Authentication)
+-Browse Page
+  -Header Section
+  -Main Movie
+   -Trailer video in the background
+   -Title and short description of the movie
+ -Movie Suggestion Section
+ -N number of movies cards with name, banner and description and they are horizontally scrollable 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ -Netflix GPT Page
 
-## Expanding the ESLint configuration
+ -Here I integrate Chat GPT APIs
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+   -Search Bar
+   -Movie Suggestions 
