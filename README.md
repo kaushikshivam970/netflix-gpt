@@ -20,3 +20,6 @@
 
    -Search Bar
    -Movie Suggestions 
+
+
+   -We can use formik like libraries in order to apply validations to form fields otherwise it will become tedious to handle validation in forms when we have large number of fields
