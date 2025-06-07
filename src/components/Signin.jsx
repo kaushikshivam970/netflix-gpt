@@ -31,15 +31,7 @@ function Signin() {
       // console.log(validationResult);
       if (!validationResult) {
         const response = await signinUser(_email, _password);
-        console.log("SIGN IN RES",response);
-        console.log("Sign In User Info",response?.userInfo);
-        const payload = {
-          token:response?.userInfo?.accessToken,
-          name:response?.userInfo?.displayName,
-          email:response?.userInfo?.email
-        }
         
-        dispatch(addUser(payload))
         
         if (response?.isUserSignedIn) {
           toast.success(response?.message);
@@ -61,18 +53,9 @@ function Signin() {
       console.log(validationResult);
       if (!validationResult && !nameValidationResult) {
         const response = await signupNewUser(_email, _password, _name);
-        console.log("NEW USER SIGNUP RES",response);
-        console.log("userInfo",response?.userInfo);
-        const payload = {
-          token:response?.userInfo?.accessToken,
-          name:response?.userInfo?.displayName,
-          email:response?.userInfo?.email
-        }
-        
-        dispatch(addUser(payload));
         
         if (response.isUserSignedUp) {
-          console.log(response.userInfo);
+          
           toast.success(response?.message);
         } else {
           toast.error(response?.message);

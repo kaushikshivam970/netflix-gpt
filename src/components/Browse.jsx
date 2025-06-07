@@ -5,7 +5,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 function Browse() {
     const {user} = useSelector((store)=>store.user)
-    console.log("AT BROWSE",user);
+
     
   const handleLogout = async () => {
     try {
@@ -25,7 +25,7 @@ function Browse() {
         Sign Out
       </button>
       <div>
-        <p>Name:{user?.name}</p>
+        <p>Name:{user?.displayName}</p>
         <p>Email:{user?.email}</p>
       </div>
     </div>

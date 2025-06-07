@@ -12,7 +12,8 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "./utils/userSlice.js";
-
+import ErrorPage from "./components/ErrorPage.jsx";
+//Fire base API to handle Signed In and Sign Out Logic in order to maintain appstore
 onAuthStateChanged(auth, (user) => {
   if (user) {
     appStore.dispatch(
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
         ),
       },
     ],
+    errorElement: <ErrorPage />,
   },
 ]);
 
