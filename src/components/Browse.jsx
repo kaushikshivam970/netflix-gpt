@@ -1,11 +1,35 @@
 import React from "react";
-
-function Browse(){
-    return(
-        <div>
-            Browse Page
-        </div>
-    )
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../utils/userSlice";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
+function Browse() {
+    const {user} = useSelector((store)=>store.user)
+    console.log("AT BROWSE",user);
+    
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <div>
+      <button
+        className="bg-red-500 p-2 rounded-lg text-white font-display font-bold"
+        onClick={() => {
+          handleLogout();
+        }}
+      >
+        Sign Out
+      </button>
+      <div>
+        <p>Name:{user?.name}</p>
+        <p>Email:{user?.email}</p>
+      </div>
+    </div>
+  );
 }
 
-export default Browse; 
+export default Browse;
