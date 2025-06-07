@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import Header from "./components/Header";
 
 
 //here useEffect is preventing logged in User in order to access public routes or paths
@@ -15,7 +16,10 @@ useEffect(() => {
   }, [isLoggedIn, location.pathname]);
  
   return (
+    <>
+      <Header isLoggedIn={isLoggedIn} />
       <Outlet />
+    </>
   );
 }
 
