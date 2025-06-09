@@ -14,17 +14,17 @@ function Header({ isLoggedIn }) {
     }
   };
   return (
-    <div className="absolute px-8 w-full py-2 bg-gradient-to-b from-black z-10 flex justify-between items-center">
-      <img src={NetflixLogo} alt="Netflix Logo" className="w-48 ml-32" />
+    <div className="fixed px-8 w-full py-2 bg-gradient-to-b from-black z-20 flex justify-between items-center">
+      <img src={NetflixLogo} alt="Netflix Logo" className={`${isLoggedIn ? "w-48 ml-20" :"w-48 ml-32"}`} />
       {isLoggedIn && (
         <div className="p-2">
           <button
-            className="bg-red-500 p-2 rounded-lg text-white font-display font-bold"
+            className="p-2 rounded-lg text-2xl text-white font-display font-bold pr-2 hover:text-red-500 transition-colors duration-200"
             onClick={() => {
               handleLogout();
             }}
           >
-            Sign Out
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </button>
         </div>
       )}

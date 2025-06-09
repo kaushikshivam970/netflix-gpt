@@ -5,6 +5,8 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { getListOfNowPlaying } from "./Services/service";
 import { addNowPlayingMovies } from "../../utils/movieSlice";
+import MainContainer from "./MainContainer";
+import SecondaryContainer from "./SecondaryContainer";
 function Browse() {
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch()
@@ -22,10 +24,8 @@ function Browse() {
   },[])
   return (
     <div className="">
-      <div className="pt-28">
-        <p>Name:{user?.displayName}</p>
-        <p>Email:{user?.email}</p>
-      </div>
+      <MainContainer />
+      <SecondaryContainer />
     </div>
   );
 }
