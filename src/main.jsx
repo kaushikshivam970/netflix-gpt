@@ -13,6 +13,7 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "./utils/userSlice.js";
 import ErrorPage from "./components/ErrorPage.jsx";
+import { removeNowPlayingMovies } from "./utils/movieSlice.js";
 //Fire base API to handle Signed In and Sign Out Logic in order to maintain appstore
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -26,6 +27,7 @@ onAuthStateChanged(auth, (user) => {
     );
   } else {
     appStore.dispatch(removeUser());
+    appStore.dispatch(removeNowPlayingMovies());
   }
 });
 
@@ -57,7 +59,6 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  
     <RouterProvider router={router} />
-  </StrictMode>
 );
