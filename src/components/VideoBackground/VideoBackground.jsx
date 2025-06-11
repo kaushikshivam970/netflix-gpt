@@ -14,7 +14,7 @@ function VideoBackground({ info }) {
     const getTrailerInfo = async () => {
       try {
         const response = await fetchVideoInfo(id);
-        console.log("Trailer response:", id,response);
+        // console.log("Trailer response:", id,response);
         const trailer = response?.data?.results?.find(
           (item) => item?.type === "Trailer"
         );
@@ -31,7 +31,6 @@ function VideoBackground({ info }) {
   if (!info || !trailerInfo?.key) {
     return (
       <div className="w-full h-screen bg-black flex items-center justify-center text-white">
-        Loading trailer...
       </div>
     );
   }
@@ -40,8 +39,8 @@ function VideoBackground({ info }) {
     <div className="relative w-full h-screen overflow-hidden">
       <iframe
         key={isMute ? "mute" : "unmute"}
-        className="absolute top-0 left-0 w-screen h-screen object-cover z-0 border-0"
-        src={`https://www.youtube.com/embed/${trailerInfo.key}?autoplay=1&mute=${isMute ? 1 : 0}&controls=0&loop=1&playlist=${trailerInfo.key}&modestbranding=1&showinfo=0&rel=0`}
+        className="absolute top-0 left-0 w-screen h-screen object-cover z-0 border-0 aspect-video"
+        src={`https://www.youtube-nocookie.com/embed/${trailerInfo.key}?autoplay=1&mute=${isMute ? 1 : 0}&controls=0&loop=1&playlist=${trailerInfo.key}&modestbranding=1&showinfo=0&rel=0`}
         title="YouTube video player"
         allow="autoplay; encrypted-media"
         allowFullScreen

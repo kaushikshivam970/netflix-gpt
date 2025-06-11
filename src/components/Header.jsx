@@ -29,7 +29,7 @@ function Header({ isLoggedIn }) {
 
   return (
     <div
-      className={`fixed px-8 w-full py-1 z-20 flex justify-between items-center ${
+      className={`fixed px-8 w-full py-1 z-50 flex justify-between items-center ${
         isScrolled ? "bg-black" : "bg-gradient-to-b from-black"
       } transition-colors duration-300 ease-in ${loading ? "hidden" : ""}`}
     >

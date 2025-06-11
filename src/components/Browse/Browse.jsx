@@ -23,7 +23,7 @@ function Browse() {
     fetchNowPlaying();
   },[])
   return (
-    <div className="">
+    <div className="bg-black">
       <MainContainer />
       <SecondaryContainer />
     </div>

@@ -51,7 +51,7 @@ function MainContainer() {
       </div>
     </div>
   ) : (
-    <div>Loading...</div>
+    <div></div>
   );
 }
 
