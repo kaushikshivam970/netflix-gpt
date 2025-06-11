@@ -14,6 +14,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "./utils/userSlice.js";
 import ErrorPage from "./components/ErrorPage.jsx";
 import { removeNowPlayingMovies } from "./utils/movieSlice.js";
+import LoadingScreen from "./components/LoadingScreen.jsx";
 //Fire base API to handle Signed In and Sign Out Logic in order to maintain appstore
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path:"/loading",
+        element:<LoadingScreen />
+      }
     ],
     errorElement: <ErrorPage />,
   },
