@@ -15,6 +15,7 @@ import { addUser, removeUser } from "./utils/userSlice.js";
 import ErrorPage from "./components/ErrorPage.jsx";
 import { removeNowPlayingMovies } from "./utils/movieSlice.js";
 import LoadingScreen from "./components/LoadingScreen.jsx";
+import GptSearch from "./components/GptSearchPage/GptSearch.jsx";
 //Fire base API to handle Signed In and Sign Out Logic in order to maintain appstore
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -55,15 +56,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:"/loading",
-        element:<LoadingScreen />
-      }
+        path: "/gpt-search",
+        element: (
+          <PrivateRoute>
+            <GptSearch />
+          </PrivateRoute>
+        ),
+      },
     ],
     errorElement: <ErrorPage />,
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
-  
-    <RouterProvider router={router} />
+  <RouterProvider router={router} />
 );

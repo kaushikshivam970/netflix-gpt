@@ -26,9 +26,9 @@ export const signupNewUser = (email, password, name) => {
         const errorMessage = error.message;
         return { isUserSignedUp: false, message: errorMessage };
       });
-    // console.log("FIREBASE SIGNUP RESPONSE",res)
+    // // console.log("FIREBASE SIGNUP RESPONSE",res)
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -49,6 +49,6 @@ export const signinUser =  (email, password) => {
       return { isUserSignedIn: false, message: errorMessage };
     })
   } catch (error) {
-    console.log(error.errors);
+    // console.log(error.errors);
   }
 };

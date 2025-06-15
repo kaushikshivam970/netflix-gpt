@@ -8,6 +8,6 @@ export const fetchVideoInfo = async(id)=>{
         const response = await getReq(FETCHVIDEOS + `${id}/videos`);
         return response
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
 }

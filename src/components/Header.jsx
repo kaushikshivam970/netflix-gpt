@@ -2,12 +2,20 @@ import React, { useEffect, useState } from "react";
 import NetflixLogo from "../assets/NetflixLogo.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
+import { useLocation } from "react-router-dom";
+import { changeLanguage } from "../utils/configSlice";
 
 function Header({ isLoggedIn }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const { loading } = useSelector((store) => store.user);
+  const location = useLocation();
+  const currentEndPoint = location.pathname;
+  const dispatch = useDispatch(); 
+  const {language} = useSelector((store)=>store.config)
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,9 +31,18 @@ function Header({ isLoggedIn }) {
     try {
       await signOut(auth);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
+
+  const handleLanguageChange = (e)=>{
+    try {
+      dispatch(changeLanguage(e.target.value));
+    } catch (error) {
+      // console.log(error);
+      
+    }
+  }
 
   return (
     <div
@@ -44,21 +61,45 @@ function Header({ isLoggedIn }) {
             <NavLink
               to={"/browse"}
               className={({ isActive }) =>
-                isActive ? "text-white brightness-200" : "text-gray-300 hover:text-gray-400 transition-colors duration-150 ease-in-out"
+                isActive
+                  ? "text-white brightness-200"
+                  : "text-gray-300 hover:text-gray-400 transition-colors duration-150 ease-in-out"
               }
             >
               Home
             </NavLink>
             <NavLink
-              to={"loading"}
+              to={"gpt-search"}
               className={({ isActive }) =>
-                isActive ? "text-white" : "text-gray-300 hover:text-gray-400 transition-colors duration-150 ease-in-out"
+                isActive
+                  ? "text-white"
+                  : "text-gray-300 hover:text-gray-400 transition-colors duration-150 ease-in-out"
               }
             >
-              Loading
+              GPT Search
             </NavLink>
           </div>
-          <div className="">
+          <div className="flex gap-6 items-center">
+            {currentEndPoint === "/gpt-search" && (
+              <select
+                name=""
+                id=""
+                className="hover:cursor-pointer outline-none rounded-xl h-fit py-1 px-4 bg-gray-700 text-white font-display font-semibold"
+                onChange={handleLanguageChange}
+                value={language}
+              >
+                {SUPPORTED_LANGUAGES &&
+                  SUPPORTED_LANGUAGES.map((lang) => (
+                    <option
+                      key={lang.identifier}
+                      className="hover:bg-slate-400"
+                      value={lang.identifier}
+                    >
+                      {lang.name}
+                    </option>
+                  ))}
+              </select>
+            )}
             <button
               className="p-2 rounded-lg text-2xl text-white font-display font-bold pr-2 hover:text-red-500 transition-colors duration-200"
               onClick={handleLogout}

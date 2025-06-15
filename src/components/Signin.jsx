@@ -28,7 +28,7 @@ function Signin() {
     const _password = password?.current?.value;
     const validationResult = checkValidData(_email, _password);
     if (isSigninForm) {
-      // console.log(validationResult);
+      // // console.log(validationResult);
       if (!validationResult) {
         const response = await signinUser(_email, _password);
         
@@ -48,9 +48,9 @@ function Signin() {
     } else {
       const _name = name?.current?.value;
       const nameValidationResult = checkValidName(_name);
-      console.log(nameValidationResult);
+      // console.log(nameValidationResult);
       
-      console.log(validationResult);
+      // console.log(validationResult);
       if (!validationResult && !nameValidationResult) {
         const response = await signupNewUser(_email, _password, _name);
         

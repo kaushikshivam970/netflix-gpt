@@ -14,7 +14,7 @@ function VideoBackground({ info }) {
     const getTrailerInfo = async () => {
       try {
         const response = await fetchVideoInfo(id);
-        // console.log("Trailer response:", id,response);
+        // // console.log("Trailer response:", id,response);
         const trailer = response?.data?.results?.find(
           (item) => item?.type === "Trailer"
         );
