@@ -8,7 +8,7 @@ export const getListOfNowPlaying = async()=>{
         const response = await getReq(NOWPLAYING);
         return response;
     } catch (error) {
-        // console.log(error)
+        console.log(error)
     }
 }
 
@@ -17,7 +17,7 @@ export const getListOfPopular = async()=>{
         const response = await getReq(POPULAR);
         return response;
     } catch (error) {
-        // console.log(error)
+        console.log(error)
     }
 }
 
@@ -26,7 +26,7 @@ export const getListOfTopRated = async()=>{
         const response = await getReq(TOPRATED);
         return response;
     } catch (error) {
-        // console.log(error)
+        console.log(error)
     }
 }
 export const getListOfUpcoming = async()=>{
@@ -34,6 +34,6 @@ export const getListOfUpcoming = async()=>{
         const response = await getReq(UPCOMING);
         return response;
     } catch (error) {
-        // console.log(error)
+        console.log(error)
     }
 }

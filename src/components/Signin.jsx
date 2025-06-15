@@ -14,7 +14,7 @@ function Signin() {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const toggleSigninForm = (e) => {
     e.preventDefault();
@@ -23,16 +23,13 @@ function Signin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //Validate the form data
     const _email = email?.current?.value;
     const _password = password?.current?.value;
     const validationResult = checkValidData(_email, _password);
+
     if (isSigninForm) {
-      // // console.log(validationResult);
       if (!validationResult) {
         const response = await signinUser(_email, _password);
-        
-        
         if (response?.isUserSignedIn) {
           toast.success(response?.message);
         } else {
@@ -40,22 +37,14 @@ function Signin() {
         }
       } else {
         setErrorMessage(validationResult?.message);
-        toast.error(validationResult?.message, {
-          position: "top-right",
-          type: "error",
-        });
+        toast.error(validationResult?.message);
       }
     } else {
       const _name = name?.current?.value;
       const nameValidationResult = checkValidName(_name);
-      // console.log(nameValidationResult);
-      
-      // console.log(validationResult);
       if (!validationResult && !nameValidationResult) {
         const response = await signupNewUser(_email, _password, _name);
-        
         if (response.isUserSignedUp) {
-          
           toast.success(response?.message);
         } else {
           toast.error(response?.message);
@@ -65,18 +54,14 @@ function Signin() {
           validationResult?.message || nameValidationResult?.message
         );
         toast.error(
-          nameValidationResult?.message || validationResult?.message,
-          {
-            position: "top-right",
-            type: "error",
-          }
+          nameValidationResult?.message || validationResult?.message
         );
       }
     }
   };
 
   return (
-    <div className="font-display">
+    <div className="font-display min-h-screen relative overflow-hidden">
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -90,109 +75,100 @@ function Signin() {
         theme="colored"
         transition={Bounce}
       />
+
+      {/* Header */}
       <Header />
-      <div className="absolute">
-        <img src={signinbgimage} alt="Background Image" />
+
+      {/* Background Image */}
+      <div className="fixed inset-0 -z-10">
+        <img
+          src={signinbgimage}
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
       </div>
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="absolute mx-auto top-24 right-0 left-0 p-16 bg-black w-[450px] flex flex-col items-start gap-4 bg-opacity-85 rounded-md "
-        autoComplete="on"
-      >
-        <h1 className="text-white font-bold text-3xl mb-3 brightness-200">
-          {isSigninForm ? "Sign In" : "Sign Up"}
-        </h1>
-        {!isSigninForm && (
-          <input
-            ref={name}
-            type="text"
-            placeholder="Full Name"
-            className="px-4 py-4 rounded-md w-full text-white bg-gray-600 border-[0.5px] border-gray-500 placeholder-gray-300 bg-opacity-10"
-          />
-        )}
-        <input
-          ref={email}
-          type="email"
-          placeholder="Email address"
-          className="px-4 py-4 rounded-md w-full text-white bg-gray-600 border-[0.5px] border-gray-500 placeholder-gray-300 bg-opacity-10"
-        />
-        <input
-          ref={password}
-          type="password"
-          placeholder="Password"
-          className="px-4 py-4 rounded-md w-full text-white bg-gray-600 border-[0.5px] border-gray-500 placeholder-gray-300 bg-opacity-10"
-        />
 
-        <button
-          className="px-4 py-2 w-full text-white bg-[#EA2F14] font-semibold rounded-md hover:bg-[#CB0404] transition-colors duration-200 ease-in-out"
-          onClick={handleSubmit}
+      {/* Form Container */}
+      <div className="flex justify-center items-start sm:items-center min-h-screen pt-32 sm:pt-0 px-4">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="w-full sm:w-[90%] md:w-[450px] p-6 sm:p-8 md:p-10 lg:p-12 bg-black bg-opacity-85 rounded-md flex flex-col gap-4"
+          autoComplete="on"
         >
-          {isSigninForm ? "Sign In" : "Sign Up"}
-        </button>
-        {isSigninForm ? (
-          <div className="w-full text-center">
-            <p className="my-1 text-white text-center">OR</p>
-          </div>
-        ) : (
-          <span className="-m-2"></span>
-        )}
-        {isSigninForm ? (
-          <button className="px-4 py-2 w-full text-white bg-gray-600 bg-opacity-50 font-semibold rounded-md hover:bg-opacity-40 transition-opacity duration-200 delay-150 ease-in-out">
-            Use a sign-in Code
-          </button>
-        ) : (
-          <span className="-m-2"></span>
-        )}
-        {isSigninForm ? (
-          <Link className="text-white m-auto underline hover:text-gray-500 transition-colors duration-150 ease-in">
-            Forgot password?
-          </Link>
-        ) : (
-          <span className="-m-2"></span>
-        )}
-        {isSigninForm ? (
-          <div className="text-white flex gap-2">
-            <input
-              type="checkbox"
-              name="rememberme"
-              id="rememberme"
-              className="accent-gray-500 scale-150 hover:accent-gray-600 transition-accent-colors duration-200 ease-in"
-            />
-            <label htmlFor="rememberme" className="hover:cursor-pointer">
-              Remember me
-            </label>
-          </div>
-        ) : (
-          <span className="-m-2"></span>
-        )}
+          <h1 className="text-white font-bold text-3xl sm:text-4xl">
+            {isSigninForm ? "Sign In" : "Sign Up"}
+          </h1>
 
-        {isSigninForm ? (
+          {!isSigninForm && (
+            <input
+              ref={name}
+              type="text"
+              placeholder="Full Name"
+              className="px-4 py-3 rounded-md w-full text-white bg-gray-600 border border-gray-500 placeholder-gray-300 bg-opacity-10"
+            />
+          )}
+
+          <input
+            ref={email}
+            type="email"
+            placeholder="Email address"
+            className="px-4 py-3 rounded-md w-full text-white bg-gray-600 border border-gray-500 placeholder-gray-300 bg-opacity-10"
+          />
+
+          <input
+            ref={password}
+            type="password"
+            placeholder="Password"
+            className="px-4 py-3 rounded-md w-full text-white bg-gray-600 border border-gray-500 placeholder-gray-300 bg-opacity-10"
+          />
+
+          <button
+            className="px-4 py-3 w-full text-white bg-[#EA2F14] font-semibold rounded-md hover:bg-[#CB0404] transition-colors duration-200"
+            onClick={handleSubmit}
+          >
+            {isSigninForm ? "Sign In" : "Sign Up"}
+          </button>
+
+          {isSigninForm && (
+            <>
+              <div className="w-full text-center text-white">OR</div>
+
+              <button className="px-4 py-3 w-full text-white bg-gray-600 bg-opacity-50 font-semibold rounded-md hover:bg-opacity-40 transition-opacity duration-200">
+                Use a sign-in Code
+              </button>
+
+              <Link className="text-white text-center underline hover:text-gray-500">
+                Forgot password?
+              </Link>
+
+              <div className="text-white flex gap-2 items-center">
+                <input
+                  type="checkbox"
+                  id="rememberme"
+                  className="accent-gray-500 scale-150"
+                />
+                <label htmlFor="rememberme">Remember me</label>
+              </div>
+            </>
+          )}
+
           <p className="text-slate-400 font-semibold">
-            New to Netflix?
+            {isSigninForm ? "New to Netflix?" : "Already have an account?"}{" "}
             <button
               onClick={toggleSigninForm}
-              className="text-white hover:underline transition-all duration-150 ease-in"
+              className="text-white hover:underline"
             >
-              Sign Up now.
+              {isSigninForm ? "Sign Up now." : "Sign In."}
             </button>
           </p>
-        ) : (
-          <p className="text-slate-400 font-semibold">
-            Already have an account?
-            <button
-              onClick={toggleSigninForm}
-              className="text-white hover:underline transition-all duration-150 ease-in"
-            >
-              Sign In.
-            </button>
+
+          <p className="text-slate-400 text-sm">
+            This page is protected by Google reCAPTCHA to ensure you're not a
+            bot.{" "}
+            <Link className="text-blue-600 underline text-sm">Learn more.</Link>
           </p>
-        )}
-        <p className="text-slate-400 text-sm">
-          This page is protected by Google reCAPTCHA to ensure you're not a bot.
-        </p>
-        <Link className="text-sm text-blue-600 underline">Learn more.</Link>
-        <div className="mb-10"></div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

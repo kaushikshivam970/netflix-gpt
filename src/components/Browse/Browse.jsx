@@ -9,7 +9,10 @@ import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 function Browse() {
   const { user } = useSelector((store) => store.user);
+  const {nowPlayingMovies} = useSelector((store)=>store.movies)
   const dispatch = useDispatch()
+  console.log("NOW PLAYING MOVIES",nowPlayingMovies);
+  
   const fetchNowPlaying = async()=>{
     try {
       const response = await getListOfNowPlaying();
@@ -28,7 +31,7 @@ function Browse() {
     }
   }
   useEffect(()=>{
-    fetchNowPlaying();
+    if(!nowPlayingMovies) fetchNowPlaying();
   },[])
   return (
     <div className="bg-black">
