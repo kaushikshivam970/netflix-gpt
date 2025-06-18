@@ -46,11 +46,11 @@ function VideoBackground({ info }) {
         allowFullScreen
       ></iframe>
 
-      {/* Mute/Unmute Button */}
-      <div className="absolute z-20 bottom-32 right-32 w-10 h-10">
+      {/* Mute/Unmute Button - Responsive positioning */}
+      <div className="absolute z-20 bottom-16 sm:bottom-20 lg:bottom-32 right-4 sm:right-8 lg:right-32 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12">
         <button
           onClick={() => setIsMute((prev) => !prev)}
-          className="border-2 border-white rounded-full w-full h-full flex items-center justify-center text-white text-2xl"
+          className="border-2 border-white rounded-full w-full h-full flex items-center justify-center text-white text-lg sm:text-xl lg:text-2xl hover:bg-white hover:bg-opacity-20 transition-all duration-200"
         >
           <i
             className={`fa-solid ${
@@ -60,9 +60,9 @@ function VideoBackground({ info }) {
         </button>
       </div>
 
-      {/* Age Rating Tag */}
-      <div className="absolute bg-gray-700 z-20 bottom-[133px] right-0 w-28 h-8 flex border-l-[5px] border-white items-center bg-opacity-50">
-        <p className="text-white text-[16px] font-display ml-2 tracking-widest">
+      {/* Age Rating Tag - Responsive positioning and sizing */}
+      <div className="absolute bg-gray-700 z-20 bottom-20 sm:bottom-24 lg:bottom-[133px] right-0 w-20 h-6 sm:w-24 sm:h-7 lg:w-28 lg:h-8 flex border-l-2 sm:border-l-4 lg:border-l-[5px] border-white items-center bg-opacity-50">
+        <p className="text-white text-xs sm:text-sm lg:text-[16px] font-display ml-1 sm:ml-2 tracking-wide sm:tracking-widest">
           {adult ? "U/A 18+" : "U/A 16+"}
         </p>
       </div>

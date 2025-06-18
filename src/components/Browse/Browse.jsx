@@ -4,13 +4,15 @@ import { removeUser } from "../../utils/userSlice";
 import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { getListOfNowPlaying, getListOfPopular, getListOfTopRated, getListOfUpcoming } from "./Services/service";
-import { addNowPlayingMovies,addPopularMovies,addTopRatedMovies,addUpcomingMovies } from "../../utils/movieSlice";
+import { addNowPlayingMovies, addPopularMovies, addTopRatedMovies, addUpcomingMovies } from "../../utils/movieSlice";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
+
 function Browse() {
   const { user } = useSelector((store) => store.user);
-  const dispatch = useDispatch()
-  const fetchNowPlaying = async()=>{
+  const dispatch = useDispatch();
+  
+  const fetchNowPlaying = async () => {
     try {
       const response = await getListOfNowPlaying();
       const popularMovies = await getListOfPopular();
@@ -18,20 +20,21 @@ function Browse() {
       const upcomingMovies = await getListOfUpcoming();
       
       // In one dispatch, we can execute only one action.
-      dispatch(addNowPlayingMovies(response?.data?.results))
-      dispatch(addPopularMovies(popularMovies?.data?.results))
-      dispatch(addTopRatedMovies(topRatedMovies?.data?.results))
-      dispatch(addUpcomingMovies(upcomingMovies?.data?.results))
+      dispatch(addNowPlayingMovies(response?.data?.results));
+      dispatch(addPopularMovies(popularMovies?.data?.results));
+      dispatch(addTopRatedMovies(topRatedMovies?.data?.results));
+      dispatch(addUpcomingMovies(upcomingMovies?.data?.results));
     } catch (error) {
       // console.log(error);
-      
     }
-  }
-  useEffect(()=>{
+  };
+
+  useEffect(() => {
     fetchNowPlaying();
-  },[])
+  }, []);
+
   return (
-    <div className="bg-black">
+    <div className="bg-black min-h-screen">
       <MainContainer />
       <SecondaryContainer />
     </div>

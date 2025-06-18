@@ -13,14 +13,14 @@ function VideoTitle(props) {
   }, []);
 
   return (
-    <div className=" ml-10">
+    <div className="ml-4 sm:ml-6 lg:ml-10 max-w-xs sm:max-w-lg lg:max-w-4xl">
       {/* CONTENT TO SHRINK */}
       <div
         className={`flex flex-col justify-start transition-all duration-1000 origin-bottom-left ease-out ${
           isTimeComplete ? "scale-75" : "scale-100"
         }`}
       >
-        <h1 className="text-white text-6xl font-bold font-display">
+        <h1 className="text-white text-2xl sm:text-4xl lg:text-6xl font-bold font-display mb-4 sm:mb-6 lg:mb-8 leading-tight">
           {original_title}
         </h1>
 
@@ -43,23 +43,23 @@ function VideoTitle(props) {
         </div>
 
         <p
-          className={`text-base text-white leading-relaxed tracking-normal text-justify max-w-3xl whitespace-pre-wrap ${
+          className={`text-sm sm:text-base lg:text-lg text-white leading-relaxed tracking-normal text-justify max-w-full sm:max-w-2xl lg:max-w-3xl whitespace-pre-wrap ${
             isTimeComplete ? "hidden" : ""
           }`}
         >
           {overview}
         </p>
       </div>
-      <div className="flex gap-4 mt-6">
-        <button className="bg-white flex items-center font-display px-8 py-3 text-black rounded-lg font-semibold hover:bg-opacity-70">
-          <i className="mr-3 text-2xl fa-solid fa-play"></i>
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4 sm:mt-6">
+        <button className="bg-white flex items-center justify-center font-display px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-black rounded-lg font-semibold hover:bg-opacity-70 transition-all duration-200 text-sm sm:text-base lg:text-lg w-full sm:w-auto">
+          <i className="mr-2 sm:mr-3 text-lg sm:text-xl lg:text-2xl fa-solid fa-play"></i>
           <span>Play</span>
         </button>
         <button
           onClick={() => showDialog()}
-          className="bg-opacity-50 flex items-center bg-gray-500 px-3 text-white py-3 rounded-lg font-display hover:bg-opacity-20 font-semibold"
+          className="bg-opacity-50 flex items-center justify-center bg-gray-500 px-3 sm:px-4 lg:px-6 text-white py-2 sm:py-3 rounded-lg font-display hover:bg-opacity-20 font-semibold transition-all duration-200 text-sm sm:text-base lg:text-lg w-full sm:w-auto"
         >
-          <i className="text-2xl mr-2 fa-solid fa-circle-info"></i>
+          <i className="text-lg sm:text-xl lg:text-2xl mr-2 fa-solid fa-circle-info"></i>
           <span>More Info</span>
         </button>
       </div>
