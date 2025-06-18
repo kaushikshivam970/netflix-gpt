@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { lang } from "../../utils/languageconstants";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,13 +14,11 @@ import {
   deleteAll
 } from "../../utils/gptSlice";
 
-function GptSearchBar({setLoading}) {
+function GptSearchBar({ setLoading }) {
   const { language } = useSelector((store) => store.config);
-  const searchText = useRef(null);
   const dispatch = useDispatch();
-  const[searchTextValue,setSearchText] = useState('')
+  const [searchTextValue, setSearchText] = useState('');
   const [rotating, setRotating] = useState(false);
-  
 
   const handleClick = () => {
     if (rotating) return; // prevent spam clicks
@@ -32,10 +30,16 @@ function GptSearchBar({setLoading}) {
       setRotating(false);
     }, 500); // match `duration-500`
   };
+
   const handleGptSearchClick = async () => {
     try {
-      setLoading(true)
-      const search = searchText.current.value;
+      if (!searchTextValue.trim()) {
+        alert('Please enter a search query');
+        return;
+      }
+      
+      setLoading(true);
+      const search = searchTextValue;
       const query = `Act as a movie recommendation system and suggest some movies for the query and just give response of names just names of 5 movies comma seperated but after comma no space with no enter in last: ${search}`;
       const response = await chatWithGemini(query);
       const listOfMovies = response.text.split(",");
@@ -48,9 +52,10 @@ function GptSearchBar({setLoading}) {
       extractedMovies = extractedMovies.filter((movie) => movie.poster_path);
       dispatch(addGptSuggestedMovies(extractedMovies));
       dispatch(addMessage(listOfMovies.join(', ')));
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -60,35 +65,38 @@ function GptSearchBar({setLoading}) {
   };
 
   return (
-    <div className="flex">
+    <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 w-full items-center justify-center">
       <form
-        action=""
-        onSubmit={(e) => e.preventDefault()}
-        className="flex gap-0"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleGptSearchClick();
+        }}
+        className="relative flex w-full max-w-2xl"
       >
         <input
-          className="px-5 py-4 w-[600px] rounded-full z-10 text-gray-200 font-semibold text-2xl outline-none bg-gray-700 selection:bg-slate-400"
+          className="px-4 sm:px-5 py-3 sm:py-4 w-full pr-20 sm:pr-24 md:pr-28 lg:pr-32 rounded-full z-10 text-gray-200 font-semibold text-base sm:text-lg md:text-xl lg:text-2xl outline-none bg-gray-700 selection:bg-slate-400 placeholder:text-gray-400"
           type="text"
           placeholder={lang[language].searchPlaceholder}
-          ref={searchText}
           value={searchTextValue}
-          onChange={(e) =>{setSearchText(e.target.value)}}
+          onChange={(e) => { setSearchText(e.target.value) }}
         />
         <button
-          className="bg-gray-500 rounded-full w-48 -ml-16 font-bold text-2xl pl-10 hover:opacity-90 active:opacity-80 select-none outline-none"
-          onClick={handleGptSearchClick}
+          className="absolute right-0 top-0 bottom-0 bg-gray-500 rounded-full w-16 sm:w-20 md:w-24 lg:w-28 font-bold text-sm sm:text-base md:text-lg lg:text-xl hover:opacity-90 active:opacity-80 select-none outline-none transition-opacity duration-200"
+          type="submit"
         >
           {lang[language].search}
         </button>
       </form>
+      
       <button
-      onClick={handleClick}
-      className={`ml-4 transition-transform duration-500 ease-in-out ${
-        rotating ? "rotate-[360deg]" : ""
-      }`}
-    >
-      <i className="text-2xl fa-solid fa-arrows-rotate"></i>
-    </button>
+        onClick={handleClick}
+        className={`flex-shrink-0 p-2 sm:p-3 bg-gray-600 hover:bg-gray-500 rounded-full transition-all duration-500 ease-in-out ${
+          rotating ? "rotate-[360deg]" : ""
+        } hover:opacity-90 active:opacity-80`}
+        aria-label="Clear search and refresh"
+      >
+        <i className="text-lg sm:text-xl md:text-2xl fa-solid fa-arrows-rotate"></i>
+      </button>
     </div>
   );
 }

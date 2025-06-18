@@ -6,26 +6,30 @@ import { deleteAll } from "../../utils/gptSlice";
 
 function GptSearch() {
   const { message, gptSuggestedMovies } = useSelector((store) => store.gpt);
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const setIsLoadingValue = (value)=>{
-    setIsLoading(value)
-  }
-  useEffect(()=>{
-   dispatch(deleteAll())
-  },[])
+  
+  const setIsLoadingValue = (value) => {
+    setIsLoading(value);
+  };
+  
+  useEffect(() => {
+    dispatch(deleteAll());
+  }, []);
+  
   return (
-    <div className="bg-black text-white font-display w-full min-h-screen flex flex-col items-center pt-36 gap-10 p-2 pb-10">
-      <div className="flex-shrink-0">
-        <GptSearchBar setLoading = {setIsLoadingValue}  />
+    <div className="bg-black text-white font-display w-full min-h-screen flex flex-col items-center pt-20 sm:pt-24 md:pt-32 lg:pt-36 gap-6 sm:gap-8 md:gap-10 p-3 sm:p-4 md:p-6 lg:p-8 pb-10">
+      <div className="flex-shrink-0 w-full max-w-4xl">
+        <GptSearchBar setLoading={setIsLoadingValue} />
       </div>
-      <div className="flex flex-row">
+      
+      <div className="w-full max-w-7xl flex justify-center">
         {isLoading ? (
-          <div className={`w-full flex justify-center items-center`}>
+          <div className="w-full flex justify-center items-center py-8 sm:py-12 md:py-16">
             <div role="status">
               <svg
                 aria-hidden="true"
-                className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
+                className="inline w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +46,7 @@ function GptSearch() {
               <span className="sr-only">Loading...</span>
             </div>
           </div>
-        ): (
+        ) : (
           <GptMovieSuggestions />
         )}
       </div>
