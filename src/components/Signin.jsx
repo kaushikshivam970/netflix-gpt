@@ -15,6 +15,7 @@ function Signin() {
   const password = useRef(null);
   const name = useRef(null);
   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const toggleSigninForm = (e) => {
     e.preventDefault();
@@ -23,12 +24,11 @@ function Signin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //Validate the form data
     const _email = email?.current?.value;
     const _password = password?.current?.value;
     const validationResult = checkValidData(_email, _password);
+
     if (isSigninForm) {
-      // // console.log(validationResult);
       if (!validationResult) {
         const response = await signinUser(_email, _password);
 
@@ -39,10 +39,7 @@ function Signin() {
         }
       } else {
         setErrorMessage(validationResult?.message);
-        toast.error(validationResult?.message, {
-          position: "top-right",
-          type: "error",
-        });
+        toast.error(validationResult?.message);
       }
     } else {
       const _name = name?.current?.value;
@@ -63,11 +60,7 @@ function Signin() {
           validationResult?.message || nameValidationResult?.message
         );
         toast.error(
-          nameValidationResult?.message || validationResult?.message,
-          {
-            position: "top-right",
-            type: "error",
-          }
+          nameValidationResult?.message || validationResult?.message
         );
       }
     }
@@ -180,6 +173,7 @@ function Signin() {
               onClick={toggleSigninForm}
               className="text-white hover:underline transition-all duration-150 ease-in ml-1"
             >
+              {isSigninForm ? "Sign Up now." : "Sign In."}
               {isSigninForm ? "Sign Up now." : "Sign In."}
             </button>
           </p>
