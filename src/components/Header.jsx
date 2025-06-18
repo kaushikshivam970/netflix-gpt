@@ -52,7 +52,7 @@ function Header() {
   // Instead, show a simplified version or reduce opacity
   return (
     <div
-      className={`absolute px-4 sm:px-8 w-full py-2 sm:py-1 z-50 ${
+      className={`fixed px-4 sm:px-8 w-full py-2 sm:py-1 z-50 ${
         isScrolled ? "bg-black" : "bg-gradient-to-b from-black"
       } transition-colors duration-300 ease-in ${
         loading ? "opacity-75" : "opacity-100"
