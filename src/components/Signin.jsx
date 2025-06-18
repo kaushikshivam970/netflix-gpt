@@ -15,7 +15,6 @@ function Signin() {
   const password = useRef(null);
   const name = useRef(null);
   const dispatch = useDispatch();
-  const dispatch = useDispatch();
 
   const toggleSigninForm = (e) => {
     e.preventDefault();
@@ -173,7 +172,6 @@ function Signin() {
               onClick={toggleSigninForm}
               className="text-white hover:underline transition-all duration-150 ease-in ml-1"
             >
-              {isSigninForm ? "Sign Up now." : "Sign In."}
               {isSigninForm ? "Sign Up now." : "Sign In."}
             </button>
           </p>
