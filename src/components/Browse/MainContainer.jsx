@@ -19,6 +19,10 @@ function MainContainer() {
       setMainMovie(movie);
       dispatch(addMainMovie(movie));
     }
+    return ()=>{
+      setMainMovie(null)
+      dispatch(addMainMovie(null));
+    }
   }, [movies]);
 
   const closeDialog = () => {
