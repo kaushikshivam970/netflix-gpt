@@ -1,3 +1,5 @@
+[Live URL](https://netflix-gpt-d1gs.onrender.com/)
+
 # Features of Netflix GPT
 
 # For Logged Out User 
